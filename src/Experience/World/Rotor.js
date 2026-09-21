@@ -14,12 +14,15 @@ export default class Rotor {
     this.isPaused = false;
 
     // UI
-    this.pauseButton = this.ui.addButton({
-      title: "pause/play",
-    });
-    this.pauseButton.on("click", () => {
-      this.isPaused = !this.isPaused;
-    });
+    // #bett: nothing at the booth should let a visitor stop the motor.
+    if (!this.experience.debug.isBett) {
+      this.pauseButton = this.ui.addButton({
+        title: "pause/play",
+      });
+      this.pauseButton.on("click", () => {
+        this.isPaused = !this.isPaused;
+      });
+    }
 
     // Resource
     this.modelResource = this.resources.items.motorSceneModel;
