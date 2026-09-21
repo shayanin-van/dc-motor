@@ -7,7 +7,7 @@ export default class RightHands {
         this.scene = this.experience.scene
         this.resources = this.experience.resources
         this.world = this.experience.world
-        this.ui = this.experience.debug.tab.pages[1]
+        this.ui = this.experience.debug.toolsPage
 
         // Resource
         this.modelResource = this.resources.items.motorSceneModel

@@ -18,19 +18,6 @@ body {
     outline: none;
 }
 
-.note {
-    position: absolute;
-    color: rgb(80, 80, 80);
-    text-align: right;
-    bottom: 10px;
-    right: 18px;
-    font-size: 12px;
-    font-family: "Mitr", sans-serif;
-    z-index: 1;
-    -webkit-user-select: none;
-    user-select: none;
-}
-
 .playHeadBar {
     display: none;
     width: 100%;
@@ -192,4 +179,62 @@ body {
     font-size: 10vw;
     top: 25%;
     left: 50%;
+}
+
+.fullscreenButton {
+    display: none;
+    position: absolute;
+    -webkit-appearance: none;
+    appearance: none;
+    background: #a3a3a3;
+    color: #ebebeb;
+    border: 0;
+    height: 25px;
+    width: 25px;
+    bottom: 8px;
+    right: 8px;
+    z-index: 5;
+    cursor: pointer;
+}
+
+.fullscreenButton:hover {
+    color: rgb(56, 56, 56);
+}
+
+.smallScreenNotice {
+    display: none;
+}
+
+/* Narrow (phone or tablet portrait) or short (phone landscape). The tweakpane
+   panel is a fixed 256px, which is two thirds of a phone's width. Matches the
+   other sims so the three behave the same. */
+@media (max-width: 900px), (max-height: 500px) {
+    .smallScreenNotice {
+        position: fixed;
+        z-index: 4;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        justify-content: center;
+        /* right side reserved so the text never runs under the button */
+        padding: 10px 41px 10px 14px;
+        background: #d3d3d3;
+        color: rgb(80, 80, 80);
+        font-family: "Mitr", sans-serif;
+        font-size: 13px;
+    }
+
+    .smallScreenNotice button {
+        -webkit-appearance: none;
+        appearance: none;
+        background: #a3a3a3;
+        color: #ebebeb;
+        border: 0;
+        font: inherit;
+        padding: 4px 10px;
+        cursor: pointer;
+    }
 }

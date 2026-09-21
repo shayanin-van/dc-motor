@@ -7,7 +7,7 @@ export default class ForceVect {
         this.scene = this.experience.scene
         this.world = this.experience.world
         this.resources = this.experience.resources
-        this.ui = this.experience.debug.tab.pages[1]
+        this.ui = this.experience.debug.toolsPage
 
         // Parameters
         this.isShowed = false

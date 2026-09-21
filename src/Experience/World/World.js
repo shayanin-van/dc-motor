@@ -33,8 +33,12 @@ export default class World {
             this.fieldVect = new FieldVect()
             this.rotorGrab = new RotorGrab()
             this.environment = new Environment()
-            this.learningMisc = new LearningMisc()
-            this.learning = new Learning()
+            // #bett drops the guided chapters for booth demos. LearningMisc
+            // only exists to be animated by Learning, so it goes too.
+            if (location.hash !== '#bett') {
+                this.learningMisc = new LearningMisc()
+                this.learning = new Learning()
+            }
         })
     }
 

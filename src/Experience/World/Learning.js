@@ -9,14 +9,15 @@ export default class Learning {
     this.resources = this.experience.resources;
     this.world = this.experience.world;
     this.time = this.experience.time;
-    this.ui = this.experience.debug.tab.pages[0];
-    this.uiVect = this.experience.debug.tab.pages[1];
+    this.ui = this.experience.debug.learningPage;
+    this.uiVect = this.experience.debug.toolsPage;
     this.camera = this.experience.camera.instance;
     this.dragControl = this.experience.camera.dragControls;
     this.orbitControl = this.experience.camera.controls;
     this.playHeadBar = document.getElementById("playHeadBar");
     this.playHead = document.getElementById("playHead");
     this.closeButton = document.getElementById("closeButton");
+    this.fullscreenButton = document.getElementById("fullscreenButton");
     this.eqBox = document.getElementById("equationBox");
     this.M = document.getElementById("M");
     this.cosTheta = document.getElementById("cosTheta");
@@ -73,8 +74,12 @@ export default class Learning {
   disableInteraction() {
     this.dragControl.enabled = false;
     this.orbitControl.enabled = false;
-    this.experience.debug.tab.pages[1].disabled = true;
-    this.experience.debug.tab.pages[0].disabled = true;
+    this.experience.debug.toolsPage.disabled = true;
+    this.experience.debug.learningPage.disabled = true;
+    // The playhead bar's close button owns this corner while a chapter runs.
+    // visibility, not display: the button is display:none whenever fullscreen
+    // is unavailable, and restoring display would resurrect a dead button.
+    this.fullscreenButton.style.visibility = "hidden";
 
     this.world.rotor.isPaused = false;
   }
@@ -82,8 +87,9 @@ export default class Learning {
   enableInteraction() {
     this.dragControl.enabled = true;
     this.orbitControl.enabled = true;
-    this.experience.debug.tab.pages[1].disabled = false;
-    this.experience.debug.tab.pages[0].disabled = false;
+    this.experience.debug.toolsPage.disabled = false;
+    this.experience.debug.learningPage.disabled = false;
+    this.fullscreenButton.style.visibility = "";
   }
 
   closeLearning() {

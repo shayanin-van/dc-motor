@@ -8,7 +8,7 @@ export default class Rotor {
     this.resources = this.experience.resources;
     this.time = this.experience.time;
     this.world = this.experience.world;
-    this.ui = this.experience.debug.tab.pages[1];
+    this.ui = this.experience.debug.toolsPage;
 
     // Misc
     this.isPaused = false;
