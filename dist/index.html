@@ -1,10 +1,9 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>DC Motor</title>
-
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
@@ -13,15 +12,11 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Mitr"
     />
-    <script type="module" crossorigin src="./assets/index-3ofzdVzD.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-QNJThDKW.css" />
+    <script type="module" crossorigin src="./assets/index-DResOSC6.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-DuLD_-xF.css" />
   </head>
   <body>
     <canvas class="webgl"></canvas>
-
-    <div class="note">
-      <p>Developer : Shayanin Vanichrudee</p>
-    </div>
     <div class="playHeadBar" id="playHeadBar">
       <input
         type="range"
@@ -92,5 +87,60 @@
         </p>
       </div>
     </div>
+    <button class="fullscreenButton" id="fullscreenButton" type="button">
+      <i class="material-icons">fullscreen</i>
+    </button>
+    <!-- ponytail: dismiss is per-page-load; add localStorage if users report it nagging -->
+    <div class="smallScreenNotice">
+      <span
+        >Best viewed on a larger screen — try a laptop, desktop, or tablet in
+        landscape.</span
+      >
+      <button type="button" onclick="this.parentElement.remove()">
+        Got it
+      </button>
+    </div>
+    <script>
+      (function () {
+        var btn = document.getElementById("fullscreenButton");
+        var span = document.querySelector(".smallScreenNotice span");
+        var device = span.textContent;
+
+        // False when the API is missing (iPhone Safari) or when an embedding
+        // iframe was not given allow="fullscreen" -- no button in either case.
+        if (document.fullscreenEnabled) {
+          btn.style.display = "block";
+          btn.addEventListener("click", function () {
+            if (document.fullscreenElement) {
+              document.exitFullscreen();
+            } else {
+              // Not the canvas: the panel, the playhead bar and the
+              // equation box are siblings of it and would all vanish.
+              // ponytail: unprefixed only, add webkitRequestFullscreen if iPadOS < 16.4 shows up
+              document.documentElement
+                .requestFullscreen()
+                .catch(function () {});
+            }
+          });
+        }
+
+        // A small frame is fixed by fullscreen; a small device is not. Offer
+        // the button while it is worth tapping, then fall back to the device
+        // advice. Esc and the browser chrome exit too, so follow the state.
+        function sync() {
+          btn.firstElementChild.textContent = document.fullscreenElement
+            ? "fullscreen_exit"
+            : "fullscreen";
+          span.textContent =
+            window.self !== window.top &&
+            document.fullscreenEnabled &&
+            !document.fullscreenElement
+              ? "Tap the fullscreen button, bottom right, for more room."
+              : device;
+        }
+        sync();
+        document.addEventListener("fullscreenchange", sync);
+      })();
+    </script>
   </body>
 </html>
